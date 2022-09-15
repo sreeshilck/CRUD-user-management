@@ -23,7 +23,7 @@ mongoose.connect("mongodb://localhost:27017/webapp", {
 
 app.use(
     cors({
-        origin: ["http://localhost:3000"],
+        origin: ["http://localhost:3001"],
         method: ["GET", "POST"],
         credentials : true,
     })
