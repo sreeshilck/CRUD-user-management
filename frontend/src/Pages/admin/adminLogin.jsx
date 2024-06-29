@@ -1,11 +1,12 @@
 import React from 'react'
 import { Fragment } from 'react'
-import AdminLogin  from '../Components/Admin/AdminLogin/AdminLogin'
+import AdminLogin from '../../Components/Admin/AdminLogin/AdminLogin'
+
 
 function adminLogin() {
   return (
     <Fragment>
-        <AdminLogin />
+      <AdminLogin />
     </Fragment>
   )
 }

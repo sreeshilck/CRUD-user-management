@@ -8,7 +8,7 @@ import axios from 'axios';
 function Home() {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
-  
+
   useEffect(() => {
     const verifyUser = async () => {
       if (!cookies.jwt) {
@@ -25,8 +25,6 @@ function Home() {
     };
     verifyUser();
   }, [cookies, navigate, removeCookie]);
-
-
 
   return (
     <>

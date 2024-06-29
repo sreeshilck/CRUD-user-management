@@ -4,22 +4,18 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
-//import './Register.css'
 
 
 function Register() {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-
   const generateError = (err) =>
     toast.error(err, {
       position: "top-center",
     });
 
-
   const onSubmit = async (values) => {
-
 
     try {
       const { data } = await axios.post("http://localhost:4000/register", {
@@ -27,8 +23,6 @@ function Register() {
       }, {
         withCredentials: true,
       })
-
-     
 
       if (data) {
         if (data.errors) {
@@ -40,11 +34,9 @@ function Register() {
           navigate("/home");
         }
       }
-
     } catch (error) {
-      console.log(error);
+      generateError('something went wrong')
     }
-
   }
 
   const [cookies, setCookies] = useCookies([]);
@@ -58,9 +50,6 @@ function Register() {
     };
     verifyUser();
   }, [cookies, navigate]);
-
-
-
 
   return (
     <div className="page">
@@ -82,7 +71,6 @@ function Register() {
             />
             {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
           </div>
-
           <div>
             <label htmlFor="email">Email</label>
             <input
@@ -93,7 +81,6 @@ function Register() {
             />
             {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
           </div>
-
           <div>
             <label htmlFor="password">Password</label>
             <input
@@ -105,7 +92,6 @@ function Register() {
                 minLength: {
                   value: 4,
                   message: "Password must be more than 4 characters"
-
                 },
                 maxLength: {
                   value: 8,
@@ -115,8 +101,6 @@ function Register() {
             />
             {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
           </div>
-
-
           <button type='submit'>Submit</button>
           <span>
             Already have an account ? <Link to="/">Login</Link>
@@ -126,10 +110,6 @@ function Register() {
       </div>
     </div>
   )
-
 }
 
 export default Register
-
-
-
