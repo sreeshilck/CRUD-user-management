@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
-
+import BASE_API_URL from '../../config'
 
 function Register() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function Register() {
   const onSubmit = async (values) => {
 
     try {
-      const { data } = await axios.post("http://localhost:4000/register", {
+      const { data } = await axios.post(`${BASE_API_URL}/register`, {
         ...values,
       }, {
         withCredentials: true,

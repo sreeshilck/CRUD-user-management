@@ -1,4 +1,4 @@
-const UserModel = require("../Models/UserModel");
+const UserModel = require("../models/user-model");
 const jwt = require("jsonwebtoken")
 require("dotenv");
 
@@ -25,15 +25,14 @@ const handleErrors = (err) => {
     return errors;
 }
 
-
-const loginhandleErrors = (err) => {
+const handleLoginErrors = (err) => {
     let errors = { email: "", password: "" };
 
     if (err.message === "Incorrect Email")
-        errors.email = "Enter valid Email"
+        errors.email = "Incorrect login credentials"
 
     if (err.message === "Incorrect Password")
-        errors.email = "Password is Incorrect"
+        errors.email = "Incorrect login credentials"
 
     if (err.message === "Blocked")
         errors.email = "You are blocked by the admin!!!"
@@ -41,23 +40,21 @@ const loginhandleErrors = (err) => {
     return errors;
 }
 
-
-module.exports.register = async (req, res, next) => {
+module.exports.register = async (req, res) => {
     try {
 
         const { name, email, password } = req.body;
         const user = await UserModel.create({ name, email, password });
-        
+
         const token = createTocken(user._id);
 
-        
-        if(email === process.env.ADMIN){
+        if (email === process.env.ADMIN) {
             res.cookie("token", token, {
                 withCredentials: true,
                 httpOnly: false,
                 maxAge: Max_Age * 1000,
             });
-            res.status(201).json({value:true});
+            res.status(201).json({ value: true });
         } else {
             res.cookie("jwt", token, {
                 withCredentials: true,
@@ -65,18 +62,14 @@ module.exports.register = async (req, res, next) => {
                 maxAge: Max_Age * 1000,
             });
 
-            res.status(201).json({ user: user._id, created: true,value:false });
+            res.status(201).json({ user: user._id, created: true, value: false });
         }
 
     } catch (err) {
-        console.log(err);
         const errors = handleErrors(err);
         res.json({ errors, created: false });
     }
 };
-
-
-
 
 module.exports.login = async (req, res) => {
     try {
@@ -84,14 +77,14 @@ module.exports.login = async (req, res) => {
         const { email, password } = req.body;
         const user = await UserModel.login(email, password);
         const token = createTocken(user._id);
-       
-        if(email === process.env.ADMIN){
+
+        if (email === process.env.ADMIN) {
             res.cookie("token", token, {
                 withCredentials: true,
                 httpOnly: false,
                 maxAge: Max_Age * 1000,
             });
-            res.status(200).json({value:true});
+            res.status(200).json({ value: true });
         } else {
             res.cookie("jwt", token, {
                 withCredentials: true,
@@ -99,14 +92,11 @@ module.exports.login = async (req, res) => {
                 maxAge: Max_Age * 1000,
             });
 
-            res.status(200).json({ user: user._id, created: true,value:false });
+            res.status(200).json({ user: user._id, created: true, value: false });
         }
 
     } catch (err) {
-        const errors = loginhandleErrors(err);
+        const errors = handleLoginErrors(err);
         res.json({ errors, created: false });
     }
 };
-
-
-

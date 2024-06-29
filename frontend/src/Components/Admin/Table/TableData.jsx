@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useCookies } from 'react-cookie'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import BASE_API_URL from '../../../config'
 
 function TableData() {
   const [cookies, setCookie, removeCookie] = useCookies([]);
@@ -19,7 +19,7 @@ function TableData() {
       if (!cookies.token) {
         navigate("/admin");
       } else {
-        const { data } = await axios.post("http://localhost:4000/admin_verify", {},
+        const { data } = await axios.post(`${BASE_API_URL}/admin-verify`, {},
           { withCredentials: true }
         );
         if (!data.status) {
@@ -36,7 +36,7 @@ function TableData() {
   }, [cookies, navigate, removeCookie]);
 
   const getUsers = async () => {
-    const response = await axios.get("http://localhost:4000/admin_panel");
+    const response = await axios.get(`${BASE_API_URL}/admin`);
     if (response.status === 200) {
       setData(response.data)
       navigate("/admin-panel")
@@ -45,7 +45,7 @@ function TableData() {
 
   const deleteUser = async (id) => {
     // if (window.confirm("Are you sure to delete user")) {
-    const response = await axios.delete(`http://localhost:4000/delete_user/${id}`)
+    const response = await axios.delete(`${BASE_API_URL}/delete/${id}`)
     toast.success(response.data);
     getUsers();
     //  }
@@ -53,7 +53,7 @@ function TableData() {
 
   const blockUser = async (id) => {
     // if (window.confirm("Are you sure to block user")) {
-    const response = await axios.put(`http://localhost:4000/block_user/${id}`)
+    const response = await axios.put(`${BASE_API_URL}/block/${id}`)
     toast.success(response.data);
     getUsers();
     //}
@@ -61,7 +61,7 @@ function TableData() {
 
   const unblockUser = async (id) => {
     // if (window.confirm("Are you sure to unblock user")) {
-    const response = await axios.put(`http://localhost:4000/unblock_user/${id}`)
+    const response = await axios.put(`${BASE_API_URL}/unblock/${id}`)
     toast.success(response.data);
     getUsers();
     // }

@@ -19,10 +19,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    role:{
-        type:String,
-        enum:["user", "admin"], 
-        default:"user"
+    role: {
+        type: String,
+        enum: ["user", "admin"],
+        default: "user"
     }
 });
 
@@ -30,34 +30,28 @@ const userSchema = new mongoose.Schema({
 userSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
-    if (this.email === process.env.ADMIN)
-    {
+    if (this.email === process.env.ADMIN) {
         this.role = "admin"
     }
     next();
 })
 
+userSchema.statics.login = async function (email, password) {
+    const user = await this.findOne({ email });
+    if (user) {
 
-    userSchema.statics.login = async function (email, password) {
-        const user = await this.findOne({ email });
-        if (user) {
-
-            if (!user.isBlocked) {
-
-                const isVerify = await bcrypt.compare(password, user.password);
-                if (isVerify) {
-                    return user;
-                }
-                throw Error("Incorrect Password");
-            } else {
-                throw Error ("Blocked")
+        if (!user.isBlocked) {
+            const isVerify = await bcrypt.compare(password, user.password);
+            if (isVerify) {
+                return user;
             }
-
+            throw Error("Incorrect Password");
+        } else {
+            throw Error("Blocked")
         }
-        throw Error("Incorrect Email")
     }
+    throw Error("Incorrect Email")
+}
 
 
-
-
-    module.exports = mongoose.model("Users", userSchema);
+module.exports = mongoose.model("Users", userSchema);
