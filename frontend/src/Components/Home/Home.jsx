@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { ToastContainer, toast } from 'react-toastify'
 import axios from 'axios';
-
+import BASE_API_URL from '../../config'
 
 function Home() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ function Home() {
       if (!cookies.jwt) {
         navigate("/");
       } else {
-        const { data } = await axios.post("http://localhost:4000/home", {},
+        const { data } = await axios.post(`${BASE_API_URL}/home`, {},
           { withCredentials: true }
         );
         if (!data.status) {

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
+import BASE_API_URL from '../../config'
 
 function AddUser() {
 
@@ -17,7 +18,7 @@ function AddUser() {
   const onSubmit = async (values) => {
 
     try {
-      const { data } = await axios.post("http://localhost:4000/register", {
+      const { data } = await axios.post(`${BASE_API_URL}/register`, {
         ...values,
       }, {
         withCredentials: true,

@@ -3,6 +3,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
+import BASE_API_URL from '../../config'
 
 const initialState = {
   name: "",
@@ -23,7 +24,7 @@ function EditUser() {
   }, [id])
 
   const getSingleUser = async (id) => {
-    const response = await axios.get(`http://localhost:4000/edit/${id}`);
+    const response = await axios.get(`${BASE_API_URL}/edit/${id}`);
     if (response.status === 200) {
 
       setState({ ...response.data })
@@ -39,7 +40,7 @@ function EditUser() {
 
   const updateUser = async (data, id) => {
     try {
-      const response = await axios.post(`http://localhost:4000/update/${id}`, data)
+      const response = await axios.post(`${BASE_API_URL}/update/${id}`, data)
 
       if (response) {
         if (response.data.errors) {

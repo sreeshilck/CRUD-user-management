@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
-
+import BASE_API_URL  from '../../config'
 
 function Register() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:4000/", {
+      const { data } = await axios.post(`${BASE_API_URL}/`, {
         ...values,
       }, {
         withCredentials: true,

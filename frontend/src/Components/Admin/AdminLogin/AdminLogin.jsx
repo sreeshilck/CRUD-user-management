@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
+import BASE_API_URL from '../../../config'
 
 function AdminLogin() {
 
@@ -20,12 +21,12 @@ function AdminLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:4000/admin_login", {
+      const { data } = await axios.post(`${BASE_API_URL}/admin-login`, {
         ...value,
       }, {
         withCredentials: true,
       })
-      console.log(data, 'data');
+
       if (data) {
         if (data.errors) {
           const { email, password } = data.errors;
@@ -33,13 +34,11 @@ function AdminLogin() {
           else if (password) generateError(password)
         } else {
           if (data.value) {
-            console.log(data.value, "data.val");
             navigate("/admin-panel");
           }
         }
       }
     } catch (error) {
-      console.log(error);
       generateError('something went wrong')
     }
   }
