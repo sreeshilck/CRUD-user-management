@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react'
-import Register from "../../Components/Register/Register"
+import React from 'react'
+import Register from '../../components/Register/Register'
 
 
 function userRegister() {
     return (
-        <Fragment>
+        <>
             <Register />
-        </Fragment>
+        </>
     )
 }
 

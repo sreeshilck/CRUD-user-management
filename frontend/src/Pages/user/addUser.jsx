@@ -1,6 +1,6 @@
 import React from 'react'
-import NavBar from '../../Components/Admin/NavBar'
-import AddUser from '../../Components/Admin/AddUser'
+import NavBar from '../../components/Admin/NavBar'
+import AddUser from '../../components/Admin/AddUser'
 
 
 function addUser() {

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import NavBar from '../../Components/Admin/NavBar'
-import Table from '../../Components/Admin/Table/TableData'
+import NavBar from '../../components/Admin/NavBar'
+import Table from '../../components/Admin/Table/TableData'
 
 
 function AdminPanel() {

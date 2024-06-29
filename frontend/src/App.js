@@ -1,15 +1,15 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import UserLoginPage from "./Pages/user/userLogin"
-import UserRegisterPage from "./Pages/user/userRegister"
-import UserHomePage from "./Pages/user/userHome"
-import AdminLoginPage from "./Pages/admin/adminLogin";
-import AdminRegisterPage from "./Pages/admin/adminRegister";
-import AdminPanelPage from "./Pages/admin/AdminPanel"
-import ErrorPage from "./Pages/error/errorPage"
 import "react-toastify/dist/ReactToastify.css"
-import AddUserPage from "./Pages/user/addUser"
-import EditUserPage from "./Pages/user/editUser"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import UserLoginPage from "./pages/user/userLogin"
+import UserRegisterPage from "./pages/user/userRegister"
+import UserHomePage from "./pages/user/userHome"
+import AdminLoginPage from "./pages/admin/adminLogin";
+import AdminRegisterPage from "./pages/admin/adminRegister";
+import AdminPanelPage from "./pages/admin/AdminPanel"
+import ErrorPage from "./pages/error/errorPage"
+import AddUserPage from "./pages/user/addUser"
+import EditUserPage from "./pages/user/editUser"
 
 function App() {
   return (

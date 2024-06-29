@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react'
-import Login from '../../Components/Login/Login'
+import React from 'react'
+import Login from '../../components/Login/Login'
 
 
 function userLogin() {
   return (
-    <Fragment>
+    <>
       <Login />
-    </Fragment>
+    </>
   )
 }
 

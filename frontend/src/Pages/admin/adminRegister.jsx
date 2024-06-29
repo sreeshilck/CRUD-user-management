@@ -1,5 +1,5 @@
 import React from 'react'
-import AdminRegister from '../../Components/Admin/AdminRegister/AdminRegister'
+import AdminRegister from '../../components/Admin/AdminRegister/AdminRegister'
 
 
 function adminRegister() {

@@ -1,14 +1,14 @@
-import React, { Fragment } from 'react'
-import Home from '../../Components/Home/Home'
-import Nav from '../../Components/Navbar/Unav';
+import React from 'react'
+import Home from '../../components/Home/Home'
+import Nav from '../../components/Navbar/Unav';
 
 
 function userHome() {
   return (
-    <Fragment>
+    <>
       <Nav />
       <Home />
-    </Fragment>
+    </>
   )
 }
 

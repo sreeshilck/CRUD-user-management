@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
-import BASE_API_URL  from '../../config'
+import BASE_API_URL from '../../config'
 
-function Register() {
+
+function Login() {
   const navigate = useNavigate();
 
   const [values, setValues] = useState({
@@ -37,7 +38,6 @@ function Register() {
           }
         }
       }
-
     } catch (error) {
       generateError('something went wrong')
     }
@@ -88,4 +88,4 @@ function Register() {
   )
 }
 
-export default Register
+export default Login
