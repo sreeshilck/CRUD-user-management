@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom'
-import { ToastContainer,toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 const initialState = {
   name: "",
@@ -25,7 +25,7 @@ function EditUser() {
   const getSingleUser = async (id) => {
     const response = await axios.get(`http://localhost:4000/edit/${id}`);
     if (response.status === 200) {
-      
+
       setState({ ...response.data })
     }
   }
@@ -35,39 +35,30 @@ function EditUser() {
     if (id) {
       updateUser(state, id)
     }
-
   }
 
   const updateUser = async (data, id) => {
     try {
-
       const response = await axios.post(`http://localhost:4000/update/${id}`, data)
-     
 
       if (response) {
         if (response.data.errors) {
-          console.log(response.errors);
           const { name, email } = response.data.errors;
           if (name) generateError(name)
           else if (email) generateError(email)
         } else {
-          navigate("/admin_panel")
+          navigate("/admin-panel")
         }
       }
-
-
     } catch (error) {
-      console.log(error);
+      generateError('something went wrong')
     }
-
   }
-
 
   const generateError = (err) =>
     toast.error(err, {
       position: "top-center",
     });
-
 
   const handleInputChange = (e) => {
     let { name, value } = e.target;
@@ -99,7 +90,6 @@ function EditUser() {
               value={email}
             />
           </div>
-
           <button type='submit' >Update</button>
         </form>
         <ToastContainer />

@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
 
- 
+
 function Register() {
   const navigate = useNavigate();
 
@@ -18,7 +18,6 @@ function Register() {
       position: "top-center",
     });
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -27,32 +26,22 @@ function Register() {
       }, {
         withCredentials: true,
       })
-
       if (data) {
-
         if (data.errors) {
-
           const { email, password } = data.errors;
           if (email) generateError(email);
           else if (password) generateError(password)
-
         } else {
-
           if (!data.value) {
-           
             navigate("/home");
           }
-
         }
-
       }
 
     } catch (error) {
-      console.log(error);
+      generateError('something went wrong')
     }
   };
-
-  // jwt validation
 
   const [cookies, setCookies] = useCookies([]);
   useEffect(() => {
@@ -84,8 +73,8 @@ function Register() {
           <div>
             <label htmlFor="password">Password</label>
             <input
-              type="password" name='password' 
-              placeholder='Password' 
+              type="password" name='password'
+              placeholder='Password'
               onChange={(e) => setValues({ ...values, [e.target.name]: e.target.value })} />
           </div>
           <button type='submit'>Login</button>

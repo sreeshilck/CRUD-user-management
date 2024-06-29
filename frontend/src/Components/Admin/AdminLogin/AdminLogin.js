@@ -3,9 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
-//import './AdminLogin.css'
-
-
 
 function AdminLogin() {
 
@@ -15,13 +12,10 @@ function AdminLogin() {
     password: "",
   })
 
-
   const generateError = (err) =>
     toast.error(err, {
       position: "top-center",
     });
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,57 +25,36 @@ function AdminLogin() {
       }, {
         withCredentials: true,
       })
-
+      console.log(data, 'data');
       if (data) {
-
         if (data.errors) {
-
           const { email, password } = data.errors;
           if (email) generateError(email);
           else if (password) generateError(password)
-
         } else {
-
           if (data.value) {
-
-            navigate("/admin_panel");
+            console.log(data.value, "data.val");
+            navigate("/admin-panel");
           }
-          // } else {
-          //   console.log("data.value /home");
-          //   //  navigate("/home")
-          // }
         }
-
-
-
       }
-
-
     } catch (error) {
       console.log(error);
+      generateError('something went wrong')
     }
-
   }
-
 
   const [cookies, setCookies] = useCookies([]);
   useEffect(() => {
     const verifyUser = async () => {
       if (cookies.token) {
-        navigate("/admin_panel");
-        console.log("in login.js /adminpanel");
+        navigate("/admin-panel");
       } else {
-        console.log("in login.js /admin");
         navigate("/admin")
       }
     };
     verifyUser();
   }, [cookies, navigate]);
-
-
-
-
-
 
   return (
     <div className="page">

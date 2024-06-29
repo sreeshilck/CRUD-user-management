@@ -8,7 +8,6 @@ function Unav() {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
 
-
   const logout = () => {
     removeCookie("jwt");
     navigate("/");
@@ -27,20 +26,17 @@ function Unav() {
               navbarScroll
             >
               {/* <Nav.Link href="#action1">Home</Nav.Link>
-        <Nav.Link href="#action2">Link</Nav.Link>
-        
-        <Nav.Link href="#" disabled>
-          Link
-        </Nav.Link> */}
+              <Nav.Link href="#action2">Link</Nav.Link>
+              <Nav.Link href="#" disabled>
+                Link
+              </Nav.Link> */}
             </Nav>
             <Form className="d-flex">
-
               <Button variant="outline-success" onClick={logout}>Logout</Button>
             </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
     </>
   )
 }
